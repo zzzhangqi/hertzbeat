@@ -14,13 +14,13 @@
             <guid>/2022/01/30/hertz-beat</guid>
             <pubDate>Sun, 30 Jan 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[易用友好的高性能监控告警系统。]]></description>
-            <content:encoded><![CDATA[<blockquote><p>易用友好的高性能监控告警系统。</p></blockquote><p><img src="https://img.shields.io/badge/%E7%BD%91%E7%AB%99%E7%9B%91%E6%8E%A7-4EB1BA.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/PING%E8%BF%9E%E9%80%9A%E6%80%A7%E7%9B%91%E6%8E%A7-blue.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/%E7%AB%AF%E5%8F%A3%E5%8F%AF%E7%94%A8%E6%80%A7%E7%9B%91%E6%8E%A7-green.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%91%E6%8E%A7-yellow.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9B%91%E6%8E%A7-orange.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/%E9%98%88%E5%80%BC%E5%91%8A%E8%AD%A6-red.svg" alt="tan-cloud"/>
-<img src="https://img.shields.io/badge/%E5%91%8A%E8%AD%A6%E8%BD%AC%E5%8F%91%E9%80%9A%E7%9F%A5-blueviolet.svg" alt="tan-cloud"/></p><h2>📫 前言</h2><blockquote><p>毕业后投入很多业余时间也做了一些开源项目,<a href="https://github.com/dromara/sureness">Sureness</a> <a href="https://gitee.com/tomsun28/bootshiro">Bootshiro</a> <a href="https://github.com/usthe/issues-translate-action">Issues-translate-action</a> ,
+            <content:encoded><![CDATA[<blockquote><p>易用友好的高性能监控告警系统。</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/web-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/ping-connect.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/port-available.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/database-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/custom-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/threshold.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/badge/alert.svg" alt="tan-cloud"/></p><h2>📫 前言</h2><blockquote><p>毕业后投入很多业余时间也做了一些开源项目,<a href="https://github.com/dromara/sureness">Sureness</a> <a href="https://gitee.com/tomsun28/bootshiro">Bootshiro</a> <a href="https://github.com/usthe/issues-translate-action">Issues-translate-action</a> ,
 当时上班有空就回答网友问题，下班回家写开源代码，远程帮人看问题，还总感觉时间不够用，当时想如果不去上班能做自己热爱的该多好。<br/>
 <!-- -->年轻就要折腾，何况还是自己很想做的。于是乎，21年底我放弃激励裸辞开始全职开源了(这里感谢老婆大人的全力支持)，也是第一次全职创业。
 自己在APM领域做了多年，当然这次创业加开源的方向也就是老本行APM监控系统，我们开发一个支持多种监控指标(更多监控类型指标正在适配中)，拥有自定义监控，支持阈值告警通知等功能，面向开发者友好的开源监控项目-HertzBeat赫兹节拍。
