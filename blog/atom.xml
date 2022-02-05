@@ -6,7 +6,7 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hertzbeat.com/blog"/>
     <subtitle>TANCLOUD探云 Blog</subtitle>
-    <icon>https://hertzbeat.com/https://tancloud.gd2.qingstor.com/img/tancloud-logo.svg</icon>
+    <icon>https://hertzbeat.com/https://cdn.jsdelivr.net/gh/usthe/hertzbeat@gh-pages/img/tancloud-logo.svg</icon>
     <rights>Copyright © 2022 TANCLOUD, Inc.</rights>
     <entry>
         <title type="html"><![CDATA[开源监控系统HertzBeat赫兹节拍]]></title>
