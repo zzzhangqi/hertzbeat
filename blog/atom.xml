@@ -2,12 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hertzbeat.com/blog</id>
     <title>TANCLOUD探云 Blog</title>
-    <updated>2022-01-30T00:00:00.000Z</updated>
+    <updated>2022-02-11T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hertzbeat.com/blog"/>
     <subtitle>TANCLOUD探云 Blog</subtitle>
     <icon>https://hertzbeat.com/https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/tancloud-logo.svg</icon>
     <rights>Copyright © 2022 TANCLOUD, Inc.</rights>
+    <entry>
+        <title type="html"><![CDATA[开源监控告警项目HertzBeat发布并进入Dromara孵化]]></title>
+        <id>/2022/02/11/hertzbeat</id>
+        <link href="https://hertzbeat.com/blog/2022/02/11/hertzbeat"/>
+        <updated>2022-02-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[tan-cloud]]></summary>
+        <content type="html"><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/web-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/ping-connect.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/port-available.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/database-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/custom-monitor.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/threshold.svg" alt="tan-cloud"/>
+<img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/alert.svg" alt="tan-cloud"/></p><p><strong>官网: <a href="https://hertzBeat.com">hertzbeat.com</a> | <a href="https://tancloud.cn">tancloud.cn</a></strong>   </p><h2>📫 前言</h2><blockquote><p>毕业后投入很多业余时间也做了一些开源项目 <a href="https://github.com/dromara/sureness">Sureness</a> , <a href="https://gitee.com/tomsun28/bootshiro">Bootshiro</a> , <a href="https://github.com/usthe/issues-translate-action">Issues-translate-action</a> ,
+当时上班有空就回答网友问题，下班回家写开源代码，远程帮人看问题(大年30也看过😂)，还总感觉时间不够用，当时想如果不去上班能做自己热爱的该多好，开源感觉是作为程序员的一种成就感吧。<br/>
+<!-- -->想着年轻就要折腾，何况还是自己很想做的。于是乎21年底放弃诱人激励裸辞开始全职开源了，也是第一次全职创业(虽然大概率失败，但搏一搏，单车变摩托🤓)<br/>
+<!-- -->自己在APM领域做了多年，当然这次创业加开源的方向也就是老本行APM监控系统，我们开发一个支持多种监控指标(更多监控类型指标正在适配中)，拥有自定义监控，支持阈值告警通知等功能，面向开发者友好的开源监控项目-HertzBeat赫兹跳动。<br/>
+<!-- -->为了感谢老婆大人的全力支持，hertzbeat服务端口默认为<strong>1157</strong>(遥遥无期)-老婆叫尧尧，我个人希望未来的宝宝叫午期(没有话语权可能性不大😂)<br/>
+<!-- -->想到很多开发者和团队拥有云上资源，可能只需要使用监控服务而并不想部署繁杂的监控系统(往往有时候那套监控系统比我们自身服务消耗的服务器资源还多😅)，我们也提供了可以直接登陆使用的SAAS云监控版本-<a href="https://console.tancloud.cn">TanCloud探云</a>。<br/>
+<!-- -->希望老铁们多多支持点赞，非常感谢。     </p></blockquote><h2>🎡 <font color="green">开始介绍</font></h2><blockquote><p><a href="https://github.com/dromara/hertzbeat">HertzBeat赫兹跳动</a> 是一个支持网站，API，PING，端口，数据库等监控类型，拥有易用友好的可视化操作界面的开源监控告警项目。<br/>
+<!-- -->我们提供了对应的<a href="https://console.tancloud.cn">SAAS云监控版本</a>，中小团队和个人无需再为了监控自己的网站资源，而去部署一套监控系统，<a href="https://console.tancloud.cn">登陆即可免费开始</a>监控之旅。<br/>
+<!-- -->监控需求指标往往千奇百怪，作为一个面向开发者的开源软件，<a href="https://hertzbeat.com/docs/advanced/extend-point">自定义监控</a> 肯定是要安排上的，大家可以只通过配置YML文件我们就可以自定义需要的监控类型和指标，来满足常见的个性化需求。<br/>
+<!-- -->HertzBeat 模块化，<code>manager, collector, scheduler, warehouse, alerter</code> 各个模块解耦合，方便大家理解上手与定制开发。<br/>
+<!-- -->我们也提供了更自由化的告警阈值配置，阈值触发表达式，三种告警级别，触发次数配置，支持告警通知模版，邮件webhook等方式告警通知，实时感知业务状态。<br/>
+<!-- -->更多功能欢迎登陆 HertzBeat 的 <a href="https://console.tancloud.cn">云环境TanCloud</a> 试用发现。<br/>
+<!-- -->我们正在快速迭代中，欢迎参与加入共建项目开源生态。    </p></blockquote><blockquote><p><code>HertzBeat</code>的多类型支持，易扩展，低耦合，希望能帮助开发者和中小团队快速搭建自有监控系统。   </p></blockquote><p>可以通过演示视频来直观了解功能： <a href="https://www.bilibili.com/video/BV1Vi4y1f7i8">https://www.bilibili.com/video/BV1Vi4y1f7i8</a>            </p><h2>🥐 模块</h2><ul><li><strong><a href="https://github.com/dromara/hertzbeat/tree/master/manager">manager</a></strong> 提供监控管理,系统管理基础服务<blockquote><p>提供对监控的管理，监控应用配置的管理，系统用户租户后台管理等。</p></blockquote></li><li><strong><a href="https://github.com/dromara/hertzbeat/tree/master/collector">collector</a></strong> 提供监控数据采集服务<blockquote><p>使用通用协议远程采集获取对端指标数据。</p></blockquote></li><li><strong><a href="https://github.com/dromara/hertzbeat/tree/master/warehouse">warehouse</a></strong> 提供监控数据仓储服务<blockquote><p>采集指标结果数据管理，数据落盘，查询，计算统计。</p></blockquote></li><li><strong><a href="https://github.com/dromara/hertzbeat/tree/master/alerter">alerter</a></strong> 提供告警服务<blockquote><p>告警计算触发，监控状态联动，告警配置，告警通知。</p></blockquote></li><li><strong><a href="https://github.com/dromara/hertzbeat/tree/master/web-app">web-app</a></strong> 提供可视化控制台页面<blockquote><p>监控告警系统可视化控制台前端(angular+ts+zorro)</p></blockquote></li></ul><p><img src="https://tancloud.gd2.qingstor.com/img/docs/hertzbeat-stru.svg" alt="hertzBeat"/>   </p><h2>🐕 快速开始</h2><ul><li>如果您不想部署而是直接使用，我们提供SAAS监控云-<a href="https://console.tancloud.cn">TanCloud探云</a>，即刻 <strong><a href="https://console.tancloud.cn">登陆注册</a></strong> 免费使用。</li><li>如果您是想将HertzBeat部署到内网环境搭建监控系统，请参考下面的 <a href="https://hertzbeat.com/docs/start/quickstart">部署文档</a> 进行操作。</li></ul><h3>🐵 依赖服务部署</h3><blockquote><p>HertzBeat最少依赖于 关系型数据库<a href="https://www.mysql.com/">MYSQL8+</a> 和 时序性数据库<a href="https://www.taosdata.com/getting-started">TDengine2+</a></p></blockquote><h5>安装MYSQL</h5><ol><li>docker安装MYSQl<br/><code>docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql</code></li><li>创建名称为hertzbeat的数据库</li><li>执行位于项目仓库/script/sql/目录下的数据库脚本 <a href="https://gitee.com/dromara/hertzbeat/raw/master/script/sql/schema.sql">schema.sql</a></li></ol><p>详细步骤参考 <a href="https://hertzbeat.com/docs/start/mysql-init">依赖服务MYSQL安装初始化</a></p><h5>安装TDengine</h5><ol><li>docker安装TDengine<br/><code>docker run -d -p 6030-6049:6030-6049 -p 6030-6049:6030-6049/udp --name tdengine tdengine/tdengine</code></li><li>创建名称为hertzbeat的数据库</li></ol><p>详细步骤参考 <a href="https://hertzbeat.com/docs/start/tdengine-init">依赖服务TDengine安装初始化</a></p><h3>🍞 HertzBeat安装</h3><blockquote><p>HertzBeat支持通过源码安装启动，Docker容器运行和安装包方式安装部署。</p></blockquote><h5>Docker方式快速安装</h5><p><code>docker run -d -p 1157:1157 --name hertzbeat tancloud/hertzbeat:latest</code></p><p>详细步骤参考 <a href="https://hertzbeat.com/docs/start/docker-deploy">通过Docker方式安装HertzBeat</a></p><h5>通过安装包安装</h5><ol><li>下载您系统环境对应的安装包 <a href="https://gitee.com/dromara/hertzbeat/releases">GITEE Release</a> <a href="https://github.com/dromara/hertzbeat/releases">GITHUB Release</a></li><li>配置HertzBeat的配置文件 hertzbeat/config/application.yml</li><li>部署启动 <code>$ ./startup.sh </code></li></ol><p>详细步骤参考 <a href="https://hertzbeat.com/docs/start/package-deploy">通过安装包安装HertzBeat</a></p><p><strong>HAVE FUN</strong></p><h2>💬 社区交流</h2><p>HertzBeat赫兹跳动为 <a href="https://dromara.org/">Dromara开源社区</a> 孵化项目</p><h5>微信交流群</h5><p>加微信号 tan-cloud 或 扫描下面账号二维码拉您进微信群。   </p><img alt="tan-cloud" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/docs/help/tan-cloud-wechat.jpg" width="200"/><h5>QQ交流群</h5><p>加QQ群号 718618151 或 扫描下面的群二维码进群, 验证信息: tancloud</p><img alt="tan-cloud" src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/docs/help/qq-qr.jpg" width="200"/><h5>交流网站</h5><p><a href="https://dromara.org/">Dromara社区网站</a>    </p><p><a href="https://support.qq.com/products/379369">HertzBeat用户网站</a>   </p><h5>仓库地址</h5><p><a href="https://github.com/dromara/hertzbeat">Github</a> <a href="https://github.com/dromara/hertzbeat">https://github.com/dromara/hertzbeat</a><br/>
+<a href="https://gitee.com/dromara/hertzbeat">Gitee</a> <a href="https://gitee.com/dromara/hertzbeat">https://gitee.com/dromara/hertzbeat</a>    </p><p>欢迎了解使用，看到这里不妨给个Star哦，灰常感谢！</p>]]></content>
+        <author>
+            <name>tom</name>
+            <uri>https://github.com/tomsun28</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[开源监控系统HertzBeat赫兹跳动]]></title>
         <id>/2022/01/30/hertz-beat</id>
