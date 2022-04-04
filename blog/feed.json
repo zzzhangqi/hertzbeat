@@ -1,8 +1,8 @@
 {
     "version": "https://jsonfeed.org/version/1",
-    "title": "TANCLOUD探云 Blog",
+    "title": "HertzBeat Blog",
     "home_page_url": "https://hertzbeat.com/blog",
-    "description": "TANCLOUD探云 Blog",
+    "description": "HertzBeat Blog",
     "items": [
         {
             "id": "/2022/03/20/hertzbeat-v1.0-beta.6",

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>TANCLOUD探云</ShortName>
-  <Description>Search TANCLOUD探云</Description>
+  <ShortName>HertzBeat</ShortName>
+  <Description>Search HertzBeat</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="16" height="16" type="image/x-icon">https://hertzbeat.com/en/https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/tancloud-logo.svg</Image>
   <Url type="text/html" method="get" template="https://hertzbeat.com/en/search?q={searchTerms}"/>
