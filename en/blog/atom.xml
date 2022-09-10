@@ -6,7 +6,7 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hertzbeat.com/en/blog"/>
     <subtitle>HertzBeat Blog</subtitle>
-    <icon>https://hertzbeat.com/en/https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/tancloud-logo.svg</icon>
+    <icon>https://hertzbeat.com/en/img/tancloud-logo.svg</icon>
     <rights>Copyright © 2022 TANCLOUD, Inc.</rights>
     <entry>
         <title type="html"><![CDATA[SSL证书过期监控最佳实践]]></title>
