@@ -17,29 +17,39 @@
 
 package com.usthe.manager.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.usthe.common.annotation.ParamType;
+import com.usthe.common.annotation.ProtocolType;
 import com.usthe.common.entity.job.Job;
 import com.usthe.common.entity.job.Metrics;
+import com.usthe.common.entity.request.BasePageRequest;
+import com.usthe.manager.custom.ParamTypeDispatch;
+import com.usthe.manager.custom.ProtocolTypeDiptach;
 import com.usthe.manager.dao.ParamDefineDao;
 import com.usthe.manager.pojo.dto.Hierarchy;
 import com.usthe.manager.pojo.dto.ParamDefineDto;
 import com.usthe.common.entity.manager.ParamDefine;
+import com.usthe.manager.pojo.vo.CustomMonitorDefinedVo;
+import com.usthe.manager.pojo.vo.CustomMonitorParamVo;
+import com.usthe.manager.pojo.vo.CustomMonitorVo;
 import com.usthe.manager.service.AppService;
+import com.usthe.manager.support.exception.MonitorMetricsException;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -58,11 +68,17 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AppServiceImpl implements AppService, CommandLineRunner {
 
+    private final Map<String,CustomMonitorVo> appCustomDefines = new ConcurrentHashMap<>();
+    private final Map<String, Class<ParamTypeDispatch>> paramClassMap = new ConcurrentHashMap<>();
+    private final Map<String, Class<ProtocolTypeDiptach>> protocolClassMap = new ConcurrentHashMap<>();
     private final Map<String, Job> appDefines = new ConcurrentHashMap<>();
     private final Map<String, List<ParamDefine>> paramDefines = new ConcurrentHashMap<>();
 
     @Autowired
     private ParamDefineDao paramDefineDao;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public List<ParamDefine> getAppParamDefines(String app) {
@@ -92,9 +108,7 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
             }
             metricNames.addAll(appDefine.getMetrics().stream().map(Metrics::getName).collect(Collectors.toList()));
         } else {
-            appDefines.forEach((k,v)->{
-                metricNames.addAll(v.getMetrics().stream().map(Metrics::getName).collect(Collectors.toList()));
-            });
+            appDefines.forEach((k,v)-> metricNames.addAll(v.getMetrics().stream().map(Metrics::getName).collect(Collectors.toList())));
         }
         return metricNames;
     }
@@ -170,6 +184,91 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
             hierarchies.add(hierarchyApp);
         }
         return hierarchies;
+    }
+
+    @Override
+    public void setCustomInfo(CustomMonitorVo customMonitorVo) {
+        if(Objects.isNull(customMonitorVo.getApp()) || Objects.isNull(customMonitorVo.getName()) || Objects.isNull(customMonitorVo.getCategory())){
+            throw new MonitorMetricsException("The custom monitor `app`,`name`,`category` must not null");
+        }
+        //verify duplicate
+        if (Objects.nonNull(appCustomDefines.get(customMonitorVo.getApp().toLowerCase()))) {
+            throw new MonitorMetricsException("finding the same app ,checking please!");
+        }
+        appCustomDefines.put(customMonitorVo.getApp().toLowerCase(),customMonitorVo);
+    }
+
+    @Override
+    public void setCustomParamInfo(CustomMonitorParamVo customMonitorParamVo) {
+        CustomMonitorVo customMonitorVo = appCustomDefines.get(customMonitorParamVo.getApp().toLowerCase());
+        customMonitorVo.setCustomMonitorParamVo(customMonitorParamVo);
+        appCustomDefines.put(customMonitorVo.getApp().toLowerCase(),customMonitorVo);
+    }
+
+    @Override
+    public void setCustomDefinedInfo(CustomMonitorDefinedVo customMonitorDefinedVo){
+        String classpath = this.getClass().getClassLoader().getResource("").getPath();
+        CustomMonitorVo customMonitorVo = appCustomDefines.get(customMonitorDefinedVo.getApp().toLowerCase());
+        customMonitorVo.setCustomMonitorDefinedVo(customMonitorDefinedVo);
+        appCustomDefines.put(customMonitorVo.getApp().toLowerCase(),customMonitorVo);
+        //save file
+        Yaml yaml = new Yaml();
+        //分别对参数信息以及定义信息进行存储,首先存储参数信息
+        CustomMonitorParamVo customMonitorParamVo = customMonitorVo.getCustomMonitorParamVo();
+        //获取参数类型注解
+        try {
+            Map<String, Object> paramMap = new HashMap<>(16);
+            paramMap.put("app", customMonitorParamVo.getApp());
+            paramMap.put("param", customMonitorParamVo.getParams().stream().map(item -> {
+                ParamTypeDispatch contextBean = applicationContext.getBean(paramClassMap.get(item.getType()));
+                Map<String, Object> dispatch = contextBean.dispatch(item);
+                dispatch.put("field",item.getField());
+                dispatch.put("name",item.getName());
+                dispatch.put("required",item.getRequired());
+                dispatch.put("defaultValue",item.getDefaultValue());
+                return dispatch;
+            }).collect(Collectors.toList()));
+            String paramPath = classpath + File.separator + "define" + File.separator + "param";
+            FileWriter paramWriter = new FileWriter(paramPath + "param-" + customMonitorDefinedVo.getApp() + ".yml");
+            //定义信息获取
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> definedMap = objectMapper.readValue(objectMapper.writeValueAsString(customMonitorDefinedVo), Map.class);
+            if (Objects.nonNull(definedMap.get("metrics"))) {
+                definedMap.put("metrics", customMonitorDefinedVo.getMetrics().stream().map(item -> {
+                    ProtocolTypeDiptach contextBean = applicationContext.getBean(protocolClassMap.get(item.getProtocol()));
+                    return contextBean.dispatch(item);
+                }).collect(Collectors.toList()));
+            }
+            String definedPath = classpath + File.separator + "define" + File.separator + "app";
+            FileWriter definedWriter = new FileWriter(definedPath + "app-" + customMonitorDefinedVo.getApp() + ".yml");
+            yaml.dump(paramMap, paramWriter);
+            yaml.dump(definedMap, definedWriter);
+        }catch (Exception e){
+            log.error(e.getMessage(), e);
+            throw new MonitorMetricsException("save fail");
+        }
+    }
+
+    @Override
+    public List<CustomMonitorVo> getAllCustomInfo(BasePageRequest basePageRequest) {
+        List<CustomMonitorVo> result = new LinkedList<>();
+        //先判断文件是否为空，如果为空则直接从文件夹取
+        if(!CollectionUtils.isEmpty(appCustomDefines)){
+            appCustomDefines.forEach((k,v)-> result.add(v));
+        }
+
+        return result;
+    }
+
+    @Override
+    public CustomMonitorVo getOneCustomInfo(String app) {
+        return null;
+    }
+
+    @Override
+    public void updateCustomInfo(CustomMonitorVo customMonitorVo) {
+        //先更新数据库
+
     }
 
     @Override
@@ -263,5 +362,18 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                 throw e;
             }
         }
+        //加载param和protocol类
+        applicationContext.getBeansWithAnnotation(ParamType.class)
+                .entrySet().iterator()
+                .forEachRemaining(entry->{
+                    Class<ParamTypeDispatch> paramTypeDispatchClass = (Class<ParamTypeDispatch>) entry.getValue().getClass();
+                    paramClassMap.put(paramTypeDispatchClass.getAnnotation(ParamType.class).name(),paramTypeDispatchClass);
+                });
+        applicationContext.getBeansWithAnnotation(ProtocolType.class)
+                .entrySet().iterator()
+                .forEachRemaining(entry->{
+                    Class<ProtocolTypeDiptach> classInfo = (Class<ProtocolTypeDiptach>) entry.getValue().getClass();
+                    protocolClassMap.put(classInfo.getAnnotation(ProtocolType.class).name(),classInfo);
+                });
     }
 }

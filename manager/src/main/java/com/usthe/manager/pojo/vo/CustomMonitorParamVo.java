@@ -14,17 +14,7 @@ import java.util.List;
  */
 @Data
 @ApiModel(description = "custom monitor param request")
-public class CustomMonitorParamVo {
-
-    /**
-     * app type
-     */
-    private String app;
-
-    /**
-     * chinese name
-     */
-    private String chName;
+public class CustomMonitorParamVo extends CustomMonitorBasicVo{
 
     /**
      * param list

@@ -1,45 +1,23 @@
 package com.usthe.manager.pojo.vo;
 
-import com.usthe.common.entity.request.CustomParamRequest;
-import com.usthe.common.entity.request.CustomRuleRequest;
 import lombok.Data;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * custom monitor request
+ * Created by lambert on 2022/9/6
+ *
  * @author lambert
- * @date 23/8/2022
+ * @date 2022/9/6
  */
 @Data
-public class CustomMonitorVo {
+public class CustomMonitorVo extends CustomMonitorBasicVo{
 
+    private CustomMonitorDefinedVo customMonitorDefinedVo;
 
-    private Integer category;
+    private CustomMonitorParamVo customMonitorParamVo;
 
-    /**
-     * app type
-     */
-    private String app;
-
-    /**
-     * chinese name
-     */
-    private String chName;
-
-    /**
-     * english name
-     */
-    private String enName;
-
-    /**
-     * import custom param
-     */
-    private Map<String,Object> params;
-
-    /**
-     * param list
-     */
-    private List<CustomRuleRequest> TreasureMonitor;
+    public void setBaseInfo(CustomMonitorBasicVo customMonitorBasicVo){
+        this.setCategory(customMonitorBasicVo.getCategory());
+        this.setApp(customMonitorBasicVo.getApp());
+        this.setName(customMonitorBasicVo.getName());
+    }
 }

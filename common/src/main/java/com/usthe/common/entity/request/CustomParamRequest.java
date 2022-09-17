@@ -19,14 +19,9 @@ public class CustomParamRequest {
     private String field;
 
     /**
-     * chinese name
+     * name
      */
-    private String chName;
-
-    /**
-     * English name
-     */
-    private String enName;
+    private Map<String,Object> name;
 
     /**
      * field type(like the type attribute of the input label)

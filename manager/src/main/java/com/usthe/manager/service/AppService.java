@@ -18,9 +18,14 @@
 package com.usthe.manager.service;
 
 import com.usthe.common.entity.job.Job;
+import com.usthe.common.entity.request.BasePageRequest;
 import com.usthe.manager.pojo.dto.Hierarchy;
 import com.usthe.common.entity.manager.ParamDefine;
+import com.usthe.manager.pojo.vo.CustomMonitorDefinedVo;
+import com.usthe.manager.pojo.vo.CustomMonitorParamVo;
+import com.usthe.manager.pojo.vo.CustomMonitorVo;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -79,4 +84,41 @@ public interface AppService {
      */
     List<Hierarchy> getAllAppHierarchy(String lang);
 
+    /**
+     * 保存自定义监控基础信息
+     * @param customMonitorVo 基础信息
+     */
+    void setCustomInfo(CustomMonitorVo customMonitorVo);
+
+    /**
+     * 保存自定义监控参数信息
+     * @param customMonitorParamVo 参数信息
+     * @return
+     */
+    void setCustomParamInfo(CustomMonitorParamVo customMonitorParamVo);
+
+    /**
+     * 保存自定义监控定义信息
+     * @param customMonitorDefinedVo
+     */
+    void setCustomDefinedInfo(CustomMonitorDefinedVo customMonitorDefinedVo);
+
+    /**
+     * 获取所有自定义消息
+     * @param basePageRequest
+     */
+    List<CustomMonitorVo> getAllCustomInfo(BasePageRequest basePageRequest);
+
+
+    /**
+     * 获取自定义监控信息
+     * @param app
+     */
+    CustomMonitorVo getOneCustomInfo(String app);
+
+    /**
+     * 更新自定义监控信息
+     * @param customMonitorVo
+     */
+    void updateCustomInfo(CustomMonitorVo customMonitorVo);
 }
