@@ -26,6 +26,8 @@ spring:
     static-locations:
       - classpath:/dist/
       - classpath:../dist/
+      - classpath:/view/
+      - classpath:../view/
   jackson:
     default-property-inclusion: NON_EMPTY
 
