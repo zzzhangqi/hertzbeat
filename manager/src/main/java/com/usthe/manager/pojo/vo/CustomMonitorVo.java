@@ -1,5 +1,6 @@
 package com.usthe.manager.pojo.vo;
 
+import com.usthe.common.entity.job.Job;
 import lombok.Data;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Data;
 @Data
 public class CustomMonitorVo extends CustomMonitorBasicVo{
 
-    private CustomMonitorDefinedVo customMonitorDefinedVo;
+    private Job customMonitorDefinedVo;
 
     private CustomMonitorParamVo customMonitorParamVo;
 

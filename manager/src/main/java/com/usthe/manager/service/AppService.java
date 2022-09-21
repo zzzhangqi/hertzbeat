@@ -21,11 +21,9 @@ import com.usthe.common.entity.job.Job;
 import com.usthe.common.entity.request.BasePageRequest;
 import com.usthe.manager.pojo.dto.Hierarchy;
 import com.usthe.common.entity.manager.ParamDefine;
-import com.usthe.manager.pojo.vo.CustomMonitorDefinedVo;
 import com.usthe.manager.pojo.vo.CustomMonitorParamVo;
 import com.usthe.manager.pojo.vo.CustomMonitorVo;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -101,7 +99,7 @@ public interface AppService {
      * 保存自定义监控定义信息
      * @param customMonitorDefinedVo
      */
-    void setCustomDefinedInfo(CustomMonitorDefinedVo customMonitorDefinedVo);
+    void setCustomDefinedInfo(Job customMonitorDefinedVo);
 
     /**
      * 获取所有自定义消息

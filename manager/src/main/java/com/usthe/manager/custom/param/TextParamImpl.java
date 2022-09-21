@@ -1,7 +1,7 @@
 package com.usthe.manager.custom.param;
 
 import com.usthe.common.annotation.ParamType;
-import com.usthe.common.entity.request.CustomParamRequest;
+import com.usthe.common.entity.manager.ParamDefine;
 import com.usthe.manager.custom.ParamTypeDispatch;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class TextParamImpl implements ParamTypeDispatch {
 
     @Override
-    public Map<String, Object> dispatch(CustomParamRequest request) {
+    public Map<String, Object> dispatch(ParamDefine request) {
         Map<String,Object> map = new HashMap<>(8);
         map.put("type","text");
         map.put("placeholder",request.getPlaceholder());

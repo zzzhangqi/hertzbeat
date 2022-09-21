@@ -9,7 +9,7 @@
 package com.usthe.manager.custom.param;
 
 import com.usthe.common.annotation.ParamType;
-import com.usthe.common.entity.request.CustomParamRequest;
+import com.usthe.common.entity.manager.ParamDefine;
 import com.usthe.manager.custom.ParamTypeDispatch;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
 @ParamType(name = "key-value")
 public class KeyValueParamImpl implements ParamTypeDispatch {
     @Override
-    public Map<String, Object> dispatch(CustomParamRequest request) {
+    public Map<String, Object> dispatch(ParamDefine request) {
         return null;
     }
 }

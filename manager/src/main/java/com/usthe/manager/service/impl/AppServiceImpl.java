@@ -29,14 +29,11 @@ import com.usthe.manager.dao.ParamDefineDao;
 import com.usthe.manager.pojo.dto.Hierarchy;
 import com.usthe.manager.pojo.dto.ParamDefineDto;
 import com.usthe.common.entity.manager.ParamDefine;
-import com.usthe.manager.pojo.vo.CustomMonitorDefinedVo;
 import com.usthe.manager.pojo.vo.CustomMonitorParamVo;
 import com.usthe.manager.pojo.vo.CustomMonitorVo;
 import com.usthe.manager.service.AppService;
 import com.usthe.manager.support.exception.MonitorMetricsException;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONObject;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
@@ -206,16 +203,22 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
     }
 
     @Override
-    public void setCustomDefinedInfo(CustomMonitorDefinedVo customMonitorDefinedVo){
-        String classpath = this.getClass().getClassLoader().getResource("").getPath();
+    public void setCustomDefinedInfo(Job customMonitorDefinedVo){
         CustomMonitorVo customMonitorVo = appCustomDefines.get(customMonitorDefinedVo.getApp().toLowerCase());
         customMonitorVo.setCustomMonitorDefinedVo(customMonitorDefinedVo);
         appCustomDefines.put(customMonitorVo.getApp().toLowerCase(),customMonitorVo);
         //save file
+        saveOrUpdateYaml(customMonitorVo,customMonitorDefinedVo);
+    }
+
+    private void saveOrUpdateYaml(CustomMonitorVo customMonitorVo,Job customMonitorDefinedVo) {
+        String classpath = this.getClass().getClassLoader().getResource("").getPath();
         Yaml yaml = new Yaml();
         //分别对参数信息以及定义信息进行存储,首先存储参数信息
         CustomMonitorParamVo customMonitorParamVo = customMonitorVo.getCustomMonitorParamVo();
         //获取参数类型注解
+        FileWriter definedWriter = null;
+        FileWriter paramWriter = null;
         try {
             Map<String, Object> paramMap = new HashMap<>(16);
             paramMap.put("app", customMonitorParamVo.getApp());
@@ -224,12 +227,12 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                 Map<String, Object> dispatch = contextBean.dispatch(item);
                 dispatch.put("field",item.getField());
                 dispatch.put("name",item.getName());
-                dispatch.put("required",item.getRequired());
+                dispatch.put("required",item.isRequired());
                 dispatch.put("defaultValue",item.getDefaultValue());
                 return dispatch;
             }).collect(Collectors.toList()));
             String paramPath = classpath + File.separator + "define" + File.separator + "param";
-            FileWriter paramWriter = new FileWriter(paramPath + "param-" + customMonitorDefinedVo.getApp() + ".yml");
+            paramWriter = new FileWriter(paramPath + "param-" + customMonitorDefinedVo.getApp() + ".yml");
             //定义信息获取
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> definedMap = objectMapper.readValue(objectMapper.writeValueAsString(customMonitorDefinedVo), Map.class);
@@ -240,35 +243,55 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                 }).collect(Collectors.toList()));
             }
             String definedPath = classpath + File.separator + "define" + File.separator + "app";
-            FileWriter definedWriter = new FileWriter(definedPath + "app-" + customMonitorDefinedVo.getApp() + ".yml");
+            definedWriter = new FileWriter(definedPath + "app-" + customMonitorDefinedVo.getApp() + ".yml");
             yaml.dump(paramMap, paramWriter);
             yaml.dump(definedMap, definedWriter);
         }catch (Exception e){
             log.error(e.getMessage(), e);
             throw new MonitorMetricsException("save fail");
+        }finally {
+            try {
+                assert definedWriter != null;
+                definedWriter.close();
+                paramWriter.close();
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+
         }
     }
 
     @Override
     public List<CustomMonitorVo> getAllCustomInfo(BasePageRequest basePageRequest) {
         List<CustomMonitorVo> result = new LinkedList<>();
-        //先判断文件是否为空，如果为空则直接从文件夹取
         if(!CollectionUtils.isEmpty(appCustomDefines)){
             appCustomDefines.forEach((k,v)-> result.add(v));
         }
-
         return result;
     }
 
     @Override
     public CustomMonitorVo getOneCustomInfo(String app) {
-        return null;
+        return appCustomDefines.get(app);
     }
 
     @Override
     public void updateCustomInfo(CustomMonitorVo customMonitorVo) {
-        //先更新数据库
-
+        //先更新当前缓存信息
+        String app = customMonitorVo.getApp();
+        appCustomDefines.put(app.toLowerCase(),customMonitorVo);
+        //更新参数相关信息
+        ParamDefineDto paramDefineDto = new ParamDefineDto();
+        paramDefineDto.setApp(app.toLowerCase());
+        if(Objects.nonNull(customMonitorVo.getCustomMonitorParamVo())) {
+            paramDefines.put(app.toLowerCase(),customMonitorVo.getCustomMonitorParamVo().getParams());
+        }
+        //更新定义信息
+        if(Objects.nonNull(customMonitorVo.getCustomMonitorDefinedVo())) {
+            appDefines.put(app.toLowerCase(),customMonitorVo.getCustomMonitorDefinedVo());
+        }
+        //保存到文件
+        saveOrUpdateYaml(customMonitorVo,customMonitorVo.getCustomMonitorDefinedVo());
     }
 
     @Override

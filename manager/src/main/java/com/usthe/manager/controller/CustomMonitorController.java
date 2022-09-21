@@ -1,10 +1,10 @@
 package com.usthe.manager.controller;
 
 import com.usthe.common.entity.dto.Message;
+import com.usthe.common.entity.job.Job;
 import com.usthe.common.entity.request.BasePageRequest;
 import com.usthe.manager.pojo.vo.CustomMonitorBasicVo;
 import com.usthe.manager.pojo.vo.CustomMonitorParamVo;
-import com.usthe.manager.pojo.vo.CustomMonitorDefinedVo;
 import com.usthe.manager.pojo.vo.CustomMonitorVo;
 import com.usthe.manager.service.AppService;
 import io.swagger.annotations.Api;
@@ -36,7 +36,7 @@ public class CustomMonitorController {
      * 保存自定义监控基本信息
      * @return ResponseEntity
      */
-    @PostMapping("/saveBasicInfo")
+    @PostMapping("/basic")
     @ApiOperation(value = "Add a custom monitoring basic information", notes = "新增自定义监控基本信息")
     public ResponseEntity<Message<Void>> setCustomMonitorBasicInfo(@RequestBody CustomMonitorBasicVo customMonitorBasicVo){
         CustomMonitorVo customMonitorVo = new CustomMonitorVo();
@@ -50,7 +50,7 @@ public class CustomMonitorController {
      * 保存自定义监控参数信息
      * @return ResponseEntity
      */
-    @PostMapping("/saveParamInfo")
+    @PostMapping("/param")
     @ApiOperation(value = "Add a custom monitoring param information", notes = "新增自定义监控参数信息")
     public ResponseEntity<Message<Void>> setCustomMonitorParamInfo(@RequestBody CustomMonitorParamVo customMonitorParamVo){
         appService.setCustomParamInfo(customMonitorParamVo);
@@ -62,9 +62,9 @@ public class CustomMonitorController {
      * 保存自定义监控定义信息
      * @return ResponseEntity
      */
-    @PostMapping("/saveDefinedInfo")
+    @PostMapping("/defined")
     @ApiOperation(value = "Add a custom monitoring defined information", notes = "新增自定义监控定义信息")
-    public ResponseEntity<Message<Void>> setCustomMonitorDefinedInfo(@RequestBody CustomMonitorDefinedVo customMonitorDefinedVo){
+    public ResponseEntity<Message<Void>> setCustomMonitorDefinedInfo(@RequestBody Job customMonitorDefinedVo){
         appService.setCustomDefinedInfo(customMonitorDefinedVo);
         return ResponseEntity.ok(new Message<>());
     }

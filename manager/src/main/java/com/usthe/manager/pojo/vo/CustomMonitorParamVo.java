@@ -1,6 +1,6 @@
 package com.usthe.manager.pojo.vo;
 
-import com.usthe.common.entity.request.CustomParamRequest;
+import com.usthe.common.entity.manager.ParamDefine;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -19,5 +19,5 @@ public class CustomMonitorParamVo extends CustomMonitorBasicVo{
     /**
      * param list
      */
-    private List<CustomParamRequest> params;
+    private List<ParamDefine> params;
 }

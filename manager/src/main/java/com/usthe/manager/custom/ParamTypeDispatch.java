@@ -1,6 +1,6 @@
 package com.usthe.manager.custom;
 
-import com.usthe.common.entity.request.CustomParamRequest;
+import com.usthe.common.entity.manager.ParamDefine;
 
 import java.util.Map;
 
@@ -15,5 +15,5 @@ public interface ParamTypeDispatch {
     /**
      * 对参数进行验证区分
      */
-    Map<String,Object> dispatch(CustomParamRequest request);
+    Map<String,Object> dispatch(ParamDefine request);
 }
