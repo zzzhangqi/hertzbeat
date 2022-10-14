@@ -33,6 +33,7 @@
     "extras": {
       "": "更多",
       "tags": "標簽管理",
+      "custom":"自定義監控配置",
       "help": "幫助中心",
       "setting": "設置"
     },
@@ -328,5 +329,12 @@
   "validation.date.required": "請選擇起止日期",
   "validation.goal.required": "請輸入目標描述",
   "validation.standard.required": "請輸入衡量標准",
-  "validation.required": "請填充必填項! "
+  "validation.required": "請填充必填項! ",
+  "custom.new":"新建",
+  "custom.delete":"刪除",
+  "custom.search":"搜索自定義監控",
+  "custom.name":"監控名稱",
+  "custom.agreement":"監控協議",
+  "custom.type":"監控類型",
+  "custom.display":"是否可用"
 }

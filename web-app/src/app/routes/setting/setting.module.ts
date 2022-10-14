@@ -11,8 +11,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
 
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingTagsComponent } from './tags/tags.component';
+import { CustomComponent } from './custom/custom.component';
 
-const COMPONENTS: Array<Type<void>> = [SettingTagsComponent];
+const COMPONENTS: Array<Type<void>> = [SettingTagsComponent,CustomComponent];
 
 @NgModule({
   imports: [

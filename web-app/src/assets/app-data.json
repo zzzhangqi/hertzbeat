@@ -102,6 +102,12 @@
           "link": "/setting/tags"
         },
         {
+          "text": "custom",
+          "i18n": "menu.extras.custom",
+          "icon": "anticon-tags",
+          "link": "/setting/custom"
+        },
+        {
           "text": "helpCenter",
           "externalLink": "https://hertzbeat.com/docs/help/guide",
           "target": "_blank",

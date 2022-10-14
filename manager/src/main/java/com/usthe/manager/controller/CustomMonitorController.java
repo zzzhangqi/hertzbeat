@@ -77,8 +77,7 @@ public class CustomMonitorController {
     @GetMapping("/")
     @ApiOperation(value = "select all custom monitor info", notes = "获取所有自定义信息")
     public ResponseEntity<List<CustomMonitorVo>> getAllCustomInfo(BasePageRequest basePageRequest){
-        appService.getAllCustomInfo(basePageRequest);
-        return null;
+        return ResponseEntity.ok(appService.getAllCustomInfo(basePageRequest));
     }
 
     /**

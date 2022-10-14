@@ -33,6 +33,7 @@
     "extras": {
       "": "更多",
       "tags": "标签管理",
+      "custom":"自定义监控配置",
       "help": "帮助中心",
       "setting": "设置"
     },
@@ -328,5 +329,12 @@
   "validation.date.required": "请选择起止日期",
   "validation.goal.required": "请输入目标描述",
   "validation.standard.required": "请输入衡量标准",
-  "validation.required": "请填充必填项! "
+  "validation.required": "请填充必填项! ",
+  "custom.new":"新建",
+  "custom.delete":"删除",
+  "custom.search":"搜索自定义监控",
+  "custom.name":"监控名称",
+  "custom.agreement":"监控协议",
+  "custom.type":"监控类型",
+  "custom.display":"是否可用"
 }

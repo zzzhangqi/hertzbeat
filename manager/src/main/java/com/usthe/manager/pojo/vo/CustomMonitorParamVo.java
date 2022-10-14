@@ -20,4 +20,5 @@ public class CustomMonitorParamVo extends CustomMonitorBasicVo{
      * param list
      */
     private List<ParamDefine> params;
+
 }

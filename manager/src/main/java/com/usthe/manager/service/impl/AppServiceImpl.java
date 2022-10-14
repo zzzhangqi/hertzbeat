@@ -23,6 +23,7 @@ import com.usthe.common.annotation.ProtocolType;
 import com.usthe.common.entity.job.Job;
 import com.usthe.common.entity.job.Metrics;
 import com.usthe.common.entity.request.BasePageRequest;
+import com.usthe.common.util.JacksonUtil;
 import com.usthe.manager.custom.ParamTypeDispatch;
 import com.usthe.manager.custom.ProtocolTypeDiptach;
 import com.usthe.manager.dao.ParamDefineDao;
@@ -330,6 +331,12 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                     try (FileInputStream fileInputStream = new FileInputStream(appFile)) {
                         Job app = yaml.loadAs(fileInputStream, Job.class);
                         appDefines.put(app.getApp().toLowerCase(), app);
+                        CustomMonitorVo customMonitorVo = new CustomMonitorVo();
+                        customMonitorVo.setCustomMonitorDefinedVo(app);
+                        customMonitorVo.setApp(app.getApp());
+                        customMonitorVo.setName(app.getName());
+                        customMonitorVo.setCategory(app.getCategory());
+                        appCustomDefines.put(app.getApp().toLowerCase(), customMonitorVo);
                     } catch (IOException e) {
                         log.error(e.getMessage(), e);
                         throw new IOException(e);
@@ -344,6 +351,12 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                     try {
                         Job app = yaml.loadAs(stream, Job.class);
                         appDefines.put(app.getApp().toLowerCase(), app);
+                        CustomMonitorVo customMonitorVo = new CustomMonitorVo();
+                        customMonitorVo.setCustomMonitorDefinedVo(app);
+                        customMonitorVo.setApp(app.getApp());
+                        customMonitorVo.setName(app.getName());
+                        customMonitorVo.setCategory(app.getCategory());
+                        appCustomDefines.put(app.getApp().toLowerCase(), customMonitorVo);
                         stream.close();
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
@@ -364,6 +377,14 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                     try (FileInputStream fileInputStream = new FileInputStream(appFile)) {
                         ParamDefineDto paramDefine = yaml.loadAs(fileInputStream, ParamDefineDto.class);
                         paramDefines.put(paramDefine.getApp().toLowerCase(), paramDefine.getParam());
+                        if(appCustomDefines.containsKey(paramDefine.getApp().toLowerCase())){
+                            CustomMonitorVo customMonitorVo = appCustomDefines.get(paramDefine.getApp().toLowerCase());
+                            CustomMonitorParamVo customMonitorParamVo = new CustomMonitorParamVo();
+                            customMonitorParamVo.setApp(customMonitorVo.getApp());
+                            customMonitorParamVo.setParams(customMonitorParamVo.getParams());
+                            customMonitorVo.setCustomMonitorParamVo(customMonitorParamVo);
+                            appCustomDefines.put(paramDefine.getApp().toLowerCase(),customMonitorVo);
+                        }
                     } catch (IOException e) {
                         log.error(e.getMessage(), e);
                         throw new IOException(e);
@@ -378,6 +399,14 @@ public class AppServiceImpl implements AppService, CommandLineRunner {
                     InputStream stream = resource.getInputStream();
                     ParamDefineDto paramDefine = yaml.loadAs(stream, ParamDefineDto.class);
                     paramDefines.put(paramDefine.getApp().toLowerCase(), paramDefine.getParam());
+                    if(appCustomDefines.containsKey(paramDefine.getApp().toLowerCase())){
+                        CustomMonitorVo customMonitorVo = appCustomDefines.get(paramDefine.getApp().toLowerCase());
+                        CustomMonitorParamVo customMonitorParamVo = new CustomMonitorParamVo();
+                        customMonitorParamVo.setApp(customMonitorVo.getApp());
+                        customMonitorParamVo.setParams(customMonitorParamVo.getParams());
+                        customMonitorVo.setCustomMonitorParamVo(customMonitorParamVo);
+                        appCustomDefines.put(paramDefine.getApp().toLowerCase(),customMonitorVo);
+                    }
                     stream.close();
                 }
             } catch (Exception e) {

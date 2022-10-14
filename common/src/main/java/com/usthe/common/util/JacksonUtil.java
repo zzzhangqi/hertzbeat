@@ -1,5 +1,6 @@
 package com.usthe.common.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Map;
@@ -17,6 +18,24 @@ public class JacksonUtil<T> {
         try {
             return objectMapper.readValue(objectMapper.writeValueAsString(t), Map.class);
         }catch(Exception e){
+            throw new RuntimeException("conversion error");
+        }
+    }
+
+    public String toString(T t){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(t);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("conversion error");
+        }
+    }
+
+    public Object toClass(String val,Class clazz){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(val, clazz);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException("conversion error");
         }
     }

@@ -13,7 +13,7 @@ import java.util.Map;
 @Data
 public class CustomMonitorBasicVo {
 
-    private Integer category;
+    private String category;
 
     /**
      * app type
@@ -23,5 +23,5 @@ public class CustomMonitorBasicVo {
     /**
      * name
      */
-    private Map<String,Object> name;
+    private Map<String,String> name;
 }
