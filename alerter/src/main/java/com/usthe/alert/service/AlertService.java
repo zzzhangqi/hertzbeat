@@ -64,6 +64,12 @@ public interface AlertService {
     void deleteAlerts(HashSet<Long> ids);
 
     /**
+     * Clear all alerts
+     * 清空所有告警记录
+     */
+    void clearAlerts();
+
+    /**
      * Update the alarm status according to the alarm ID-status value
      * 根据告警ID-状态值 更新告警状态
      *
@@ -80,8 +86,8 @@ public interface AlertService {
     AlertSummary getAlertsSummary();
 
     /**
-     * 第三方 上报告警信息
-     * @param alertReport 告警信息
+     * A third party reports an alarm  第三方 上报告警信息
+     * @param alertReport The alarm information 告警信息
      */
     void addNewAlertReport(AlertReport alertReport);
 
