@@ -1,6 +1,5 @@
 package com.usthe.manager.controller;
 
-import com.usthe.common.entity.dto.Message;
 import com.usthe.common.entity.job.Job;
 import com.usthe.common.entity.manager.ParamDefine;
 import com.usthe.common.util.CommonConstants;
@@ -13,15 +12,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 

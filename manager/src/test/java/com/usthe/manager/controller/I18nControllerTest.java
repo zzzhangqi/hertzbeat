@@ -1,7 +1,6 @@
 package com.usthe.manager.controller;
 
 import com.usthe.common.util.CommonConstants;
-import com.usthe.manager.service.TagService;
 import com.usthe.manager.service.impl.AppServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

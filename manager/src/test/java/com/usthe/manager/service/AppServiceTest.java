@@ -1,6 +1,5 @@
 package com.usthe.manager.service;
 
-import com.usthe.manager.controller.NoticeConfigController;
 import com.usthe.manager.service.impl.AppServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
