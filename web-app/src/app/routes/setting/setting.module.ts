@@ -9,11 +9,11 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ColorPickerModule } from 'ngx-color-picker';
 
+import { CustomComponent } from './custom/custom.component';
 import { SettingRoutingModule } from './setting-routing.module';
 import { SettingTagsComponent } from './tags/tags.component';
-import { CustomComponent } from './custom/custom.component';
 
-const COMPONENTS: Array<Type<void>> = [SettingTagsComponent,CustomComponent];
+const COMPONENTS: Array<Type<void>> = [SettingTagsComponent, CustomComponent];
 
 @NgModule({
   imports: [

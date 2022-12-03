@@ -1,49 +1,49 @@
 <nz-divider></nz-divider>
 <nz-breadcrumb>
-    <nz-breadcrumb-item>
-      <a [routerLink]="['/']">
-        <i nz-icon nzType="home"></i>
-        <span>{{ 'menu.dashboard' | i18n }}</span>
-      </a>
-    </nz-breadcrumb-item>
-    <nz-breadcrumb-item>
-      <i nz-icon nzType="tags"></i>
-      <span>{{ 'menu.extras.custom' | i18n }}</span>
-      <a href="https://hertzbeat.com/docs/help/alert_threshold" target="_blank" style="float: right; margin-right: 5%">
-        <span>{{ 'common.button.help' | i18n }}&nbsp;</span>
-        <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-      </a>
-    </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['/']">
+      <i nz-icon nzType="home"></i>
+      <span>{{ 'menu.dashboard' | i18n }}</span>
+    </a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item>
+    <i nz-icon nzType="tags"></i>
+    <span>{{ 'menu.extras.custom' | i18n }}</span>
+    <a href="https://hertzbeat.com/docs/help/alert_threshold" target="_blank" style="float: right; margin-right: 5%">
+      <span>{{ 'common.button.help' | i18n }}&nbsp;</span>
+      <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+    </a>
+  </nz-breadcrumb-item>
 </nz-breadcrumb>
 <nz-divider></nz-divider>
 <!-- 按钮界面 -->
 <div>
-    <button nz-button nzType="primary" nz-tooltip (click)="sync()" [nzTooltipTitle]="'common.refresh' | i18n">
-        <i nz-icon nzType="sync" nzTheme="outline"></i>
-    </button>
-    <button nz-button nzType="primary" (click)="addCustomMonitor()">
-        <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
-        {{ 'custom.new' | i18n }}
-    </button>
+  <button nz-button nzType="primary" nz-tooltip (click)="sync()" [nzTooltipTitle]="'common.refresh' | i18n">
+    <i nz-icon nzType="sync" nzTheme="outline"></i>
+  </button>
+  <button nz-button nzType="primary" (click)="addCustomMonitor()">
+    <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
+    {{ 'custom.new' | i18n }}
+  </button>
 
-    <button nz-button nzType="primary" nzDanger (click)="deleteCustomMonitor()">
-        <i nz-icon nzType="delete" nzTheme="outline"></i>
-        {{ 'custom.delete' | i18n }}
-    </button>
+  <button nz-button nzType="primary" nzDanger (click)="deleteCustomMonitor()">
+    <i nz-icon nzType="delete" nzTheme="outline"></i>
+    {{ 'custom.delete' | i18n }}
+  </button>
 
-    <button style="margin-right: 25px; float: right" nz-button nzType="primary" (click)='searchMonitor()'>
-        {{ 'common.search' | i18n }}
-    </button>
-    <input
-        style="margin-right: 5px; float: right; width: 300px; border-radius: 9px; text-align: center"
-        nz-input
-        type="text"
-        [placeholder]="'custom.search' | i18n"
-        nzSize="default"
-        (keyup.enter)="loadCustomTable()"
-        [(ngModel)]="search"
-    />
-    <nz-table
+  <button style="margin-right: 25px; float: right" nz-button nzType="primary" (click)="searchMonitor()">
+    {{ 'common.search' | i18n }}
+  </button>
+  <input
+    style="margin-right: 5px; float: right; width: 300px; border-radius: 9px; text-align: center"
+    nz-input
+    type="text"
+    [placeholder]="'custom.search' | i18n"
+    nzSize="default"
+    (keyup.enter)="loadCustomTable()"
+    [(ngModel)]="search"
+  />
+  <nz-table
     #fixedTable
     [nzData]="customs"
     [nzPageIndex]="pageIndex"
@@ -57,22 +57,22 @@
     (nzQueryParams)="onTableCustomChange($event)"
     nzShowPagination="true"
     [nzScroll]="{ x: '1150px', y: '1240px' }"
-    >
+  >
     <thead>
-        <tr>
-            <th nzAlign="center" nzLeft nzWidth="4%" [(nzChecked)]="checkedAll" (nzCheckedChange)="onAllChecked($event)"></th>
-            <th nzAlign="center">{{ 'custom.name' | i18n }}</th>
-            <th nzAlign="center">{{ 'custom.agreement' | i18n }}</th>
-            <th nzAlign="center">{{ 'custom.type' | i18n }}</th>
-            <th nzAlign="center">{{ 'common.edit' | i18n }}</th>
-            </tr>
+      <tr>
+        <th nzAlign="center" nzLeft nzWidth="4%" [(nzChecked)]="checkedAll" (nzCheckedChange)="onAllChecked($event)"></th>
+        <th nzAlign="center">{{ 'custom.name' | i18n }}</th>
+        <th nzAlign="center">{{ 'custom.agreement' | i18n }}</th>
+        <th nzAlign="center">{{ 'custom.type' | i18n }}</th>
+        <th nzAlign="center">{{ 'common.edit' | i18n }}</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of fixedTable.data">
         <td nzAlign="center" nzLeft></td>
-        <td nzAlign="center">{{data.name}}</td>
-        <td nzAlign="center">{{data.category}}</td>
-        <td nzAlign="center">{{data.app}}</td>
+        <td nzAlign="center">{{ data.name }}</td>
+        <td nzAlign="center">{{ data.category }}</td>
+        <td nzAlign="center">{{ data.app }}</td>
         <td nzAlign="center">666</td>
         <td nzAlign="center">
           <nz-tag>444</nz-tag>
@@ -82,10 +82,9 @@
           <nz-tag>222</nz-tag>
         </td>
         <td nzAlign="center">111</td>
-        <td nzAlign="center">
-        </td>
+        <td nzAlign="center"> </td>
       </tr>
     </tbody>
-    </nz-table>
-    <ng-template #rangeTemplate> {{ 'common.total' | i18n }} {{ total }} </ng-template>
+  </nz-table>
+  <ng-template #rangeTemplate> {{ 'common.total' | i18n }} {{ total }} </ng-template>
 </div>
