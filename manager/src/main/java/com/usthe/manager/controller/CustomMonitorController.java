@@ -36,7 +36,7 @@ public class CustomMonitorController {
      * 保存自定义监控基本信息
      * @return ResponseEntity
      */
-    @PostMapping("/basic")
+    @PostMapping("/basic/")
     @ApiOperation(value = "Add a custom monitoring basic information", notes = "新增自定义监控基本信息")
     public ResponseEntity<Message<Void>> setCustomMonitorBasicInfo(@RequestBody CustomMonitorBasicVo customMonitorBasicVo){
         CustomMonitorVo customMonitorVo = new CustomMonitorVo();
@@ -50,7 +50,7 @@ public class CustomMonitorController {
      * 保存自定义监控参数信息
      * @return ResponseEntity
      */
-    @PostMapping("/param")
+    @PostMapping("/param/")
     @ApiOperation(value = "Add a custom monitoring param information", notes = "新增自定义监控参数信息")
     public ResponseEntity<Message<Void>> setCustomMonitorParamInfo(@RequestBody CustomMonitorParamVo customMonitorParamVo){
         appService.setCustomParamInfo(customMonitorParamVo);
@@ -62,7 +62,7 @@ public class CustomMonitorController {
      * 保存自定义监控定义信息
      * @return ResponseEntity
      */
-    @PostMapping("/defined")
+    @PostMapping("/defined/")
     @ApiOperation(value = "Add a custom monitoring defined information", notes = "新增自定义监控定义信息")
     public ResponseEntity<Message<Void>> setCustomMonitorDefinedInfo(@RequestBody Job customMonitorDefinedVo){
         appService.setCustomDefinedInfo(customMonitorDefinedVo);
@@ -84,7 +84,7 @@ public class CustomMonitorController {
      * select one custom monitor info
      * 获取自定义监控信息
      */
-    @GetMapping("/{app}")
+    @GetMapping("/{app}/")
     @ApiOperation(value = "select all custom monitor info", notes = "获取所有自定义信息")
     public ResponseEntity<CustomMonitorVo> getOneCustomInfo(@PathVariable("app") String app){
         appService.getOneCustomInfo(app);
