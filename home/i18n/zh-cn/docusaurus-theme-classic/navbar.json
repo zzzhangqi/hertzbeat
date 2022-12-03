@@ -50,5 +50,13 @@
   "item.label.相关资源": {
     "message": "相关资源",
     "description": "Navbar item with label 相关资源"
+  },
+  "item.label.关于": {
+    "message": "关于",
+    "description": "Navbar item with label 关于"
+  },
+  "item.label.开发者们": {
+    "message": "开发者们",
+    "description": "Navbar item with label 开发者们"
   }
 }

@@ -74,7 +74,13 @@ export class MonitorService {
     return this.http.get<Message<Monitor[]>>(`${monitors_uri}/${app}`);
   }
 
-  public getMonitors(app: string, pageIndex: number, pageSize: number): Observable<Message<Page<Monitor>>> {
+  public getMonitors(
+    app: string,
+    pageIndex: number,
+    pageSize: number,
+    sortField?: string | null,
+    sortOrder?: string | null
+  ): Observable<Message<Page<Monitor>>> {
     app = app.trim();
     pageIndex = pageIndex ? pageIndex : 0;
     pageSize = pageSize ? pageSize : 8;
@@ -85,6 +91,12 @@ export class MonitorService {
       pageIndex: pageIndex,
       pageSize: pageSize
     });
+    if (sortField != null && sortOrder != null) {
+      httpParams = httpParams.appendAll({
+        sort: sortField,
+        order: sortOrder == 'ascend' ? 'asc' : 'desc'
+      });
+    }
     const options = { params: httpParams };
     return this.http.get<Message<Page<Monitor>>>(monitors_uri, options);
   }
@@ -144,12 +156,7 @@ export class MonitorService {
     return this.http.get<Message<any>>(summary_uri);
   }
 
-  public getWarehouseStorageServerStatus(storage: string): Observable<Message<any>> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.appendAll({
-      storage: storage
-    });
-    const options = { params: httpParams };
-    return this.http.get<Message<any>>(warehouse_storage_status_uri, options);
+  public getWarehouseStorageServerStatus(): Observable<Message<any>> {
+    return this.http.get<Message<any>>(warehouse_storage_status_uri);
   }
 }
